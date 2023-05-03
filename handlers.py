@@ -42,6 +42,10 @@ def write_db(db_dict: dict) -> None:
         f.write(json.dumps(db_dict, indent=4, ensure_ascii=False))
 
 
+def get_off_hours_str(off_hours) -> str:
+    return f"Số giờ nghỉ: {off_hours} giờ." if off_hours else ""
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
@@ -96,16 +100,16 @@ async def nghi(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) < 1:
         await update.message.reply_text(
             text="""Nhập thêm ngày nghỉ
-Ví dụ:  /nghi 25/4 24
+Ví dụ:  /nghi 25/4
         /nghi 2/5 12
-        /nghi 30/4 le""",
+        /nghi 30/4 0""",
             parse_mode="HTML",
         )
         return
 
     try:
         input_date_str = context.args[0] + add_this_year()
-        off_hours = context.args[1] if len(context.args) >= 2 else 0
+        off_hours = context.args[1] if len(context.args) >= 2 else 24
         input_date = datetime.strptime(input_date_str, "%d/%m/%Y")
         db_dict = get_db()
 
@@ -116,12 +120,11 @@ Ví dụ:  /nghi 25/4 24
         write_db(db_dict)
 
         await update.message.reply_text(
-            text=f"Đã thêm ngày nghỉ{' LỄ' if off_hours else ''} {input_date_str}."
-            + f"Số giờ nghỉ: {off_hours} giờ."
-            if off_hours
-            else ""
+            text=f"Đã thêm ngày nghỉ{' LỄ' if off_hours == '0' else ''} {input_date_str}."
+            + get_off_hours_str(off_hours=off_hours)
         )
-    except:
+    except Exception as e:
+        print(e)
         await update.message.reply_text(
             text="Có lỗi xảy ra, liên hệ với Chồng boé nhé vợ iu"
         )
@@ -159,7 +162,7 @@ async def tinh(update: Update, context: ContextTypes.DEFAULT_TYPE):
         db_dict = get_db()
         sorted_days_off_dict = sorted(
             db_dict.get("nghi", {}).items(),
-            key=lambda x: (x[1], datetime.strptime(x[0], "%d/%m/%Y")),
+            key=lambda x: (int(x[1]), datetime.strptime(x[0], "%d/%m/%Y")),
         )
         start_day_str = db_dict.get("batdau", "")
         start_day = datetime.strptime(start_day_str, "%d/%m/%Y %H:%M:%S")
@@ -169,16 +172,16 @@ async def tinh(update: Update, context: ContextTypes.DEFAULT_TYPE):
         for day in sorted_days_off_dict:
             day_off, off_hours = day
             msg += (
-                f"\nNghỉ {'LỄ ' if off_hours else ''}ngày: {day_off}."
-                + f"Số giờ nghỉ: {off_hours} giờ."
-                if off_hours
-                else ""
+                f"\nNghỉ {'LỄ ' if off_hours == '0' else ''}ngày: {day_off}."
+                + get_off_hours_str(off_hours=off_hours)
             )
 
-        sum_hours_off = sum(day[-1] for day in sorted_days_off_dict if not day[-1])
+        # print(sorted_days_off_dict)
+        sum_hours_off = sum(int(day[-1]) for day in sorted_days_off_dict)
+        # print(sum_hours_off)
         _29days = start_day + timedelta(days=29) + timedelta(hours=sum_hours_off)
 
-        msg += f"\nNgày đủ 29 công: {_29days.strftime('%d/%m/%Y %H:%M:%S')}"
+        msg += f"\n\nNgày đủ 29 công: {_29days.strftime('%d/%m/%Y %H:%M:%S')}"
         await update.message.reply_text(text=msg)
 
     except Exception as e:
