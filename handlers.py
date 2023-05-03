@@ -64,14 +64,19 @@ async def batdau(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) < 1:
         await update.message.reply_text(
             text="""Nhập ngày bắt đầu tính công
-Ví dụ: /batdau 15/4""",
+Ví dụ:  /batdau 15/4
+        /batdau 15/4 12""",
             parse_mode="HTML",
         )
         return
 
     try:
-        input_date_str = context.args[0] + add_this_year()
-        input_date = datetime.strptime(input_date_str, "%d/%m/%Y")
+        if len(context.args) >= 2 and context.args[1] == "12":
+            hour_str = " 12:00:00"
+        else:
+            hour_str = " 00:00:00"
+        input_date_str = context.args[0] + add_this_year() + hour_str
+        input_date = datetime.strptime(input_date_str, "%d/%m/%Y %H:%M:%S")
 
         db_dict = get_db()
         db_dict["batdau"] = input_date_str
@@ -91,7 +96,8 @@ async def nghi(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) < 1:
         await update.message.reply_text(
             text="""Nhập thêm ngày nghỉ
-Ví dụ:  /nghi 25/4
+Ví dụ:  /nghi 25/4 24
+        /nghi 2/5 12
         /nghi 30/4 le""",
             parse_mode="HTML",
         )
@@ -99,18 +105,21 @@ Ví dụ:  /nghi 25/4
 
     try:
         input_date_str = context.args[0] + add_this_year()
-        is_holiday = True if len(context.args) >= 2 else False
+        off_hours = context.args[1] if len(context.args) >= 2 else 0
         input_date = datetime.strptime(input_date_str, "%d/%m/%Y")
         db_dict = get_db()
 
         db_dict_nghi = db_dict.get("nghi", {})
-        db_dict_nghi[input_date_str] = is_holiday
+        db_dict_nghi[input_date_str] = off_hours
         db_dict["nghi"] = db_dict_nghi
 
         write_db(db_dict)
 
         await update.message.reply_text(
-            text=f"Đã thêm ngày nghỉ {'LỄ' if is_holiday else ''} là: {input_date_str}"
+            text=f"Đã thêm ngày nghỉ{' LỄ' if off_hours else ''} {input_date_str}."
+            + f"Số giờ nghỉ: {off_hours} giờ."
+            if off_hours
+            else ""
         )
     except:
         await update.message.reply_text(
@@ -153,18 +162,23 @@ async def tinh(update: Update, context: ContextTypes.DEFAULT_TYPE):
             key=lambda x: (x[1], datetime.strptime(x[0], "%d/%m/%Y")),
         )
         start_day_str = db_dict.get("batdau", "")
-        start_day = datetime.strptime(start_day_str, "%d/%m/%Y")
+        start_day = datetime.strptime(start_day_str, "%d/%m/%Y %H:%M:%S")
         msg = f"Ngày bắt đầu tính công: {start_day_str}"
         if sorted_days_off_dict:
             msg += f"\nDanh sách ngày nghỉ:"
         for day in sorted_days_off_dict:
-            day_off, is_holiday = day
-            msg += f"\nNghỉ {'LỄ ' if is_holiday else ''}ngày: {day_off}"
+            day_off, off_hours = day
+            msg += (
+                f"\nNghỉ {'LỄ ' if off_hours else ''}ngày: {day_off}."
+                + f"Số giờ nghỉ: {off_hours} giờ."
+                if off_hours
+                else ""
+            )
 
-        days_off = sum(1 for day in sorted_days_off_dict if not day[-1])
-        _29days = start_day + timedelta(days=29 + days_off)
+        sum_hours_off = sum(day[-1] for day in sorted_days_off_dict if not day[-1])
+        _29days = start_day + timedelta(days=29) + timedelta(hours=sum_hours_off)
 
-        msg += f"\nNgày đủ 29 công: {_29days.strftime('%d/%m/%Y')}"
+        msg += f"\nNgày đủ 29 công: {_29days.strftime('%d/%m/%Y %H:%M:%S')}"
         await update.message.reply_text(text=msg)
 
     except Exception as e:
