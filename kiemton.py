@@ -38,28 +38,30 @@ def write_log(msg):
 
 
 class Kiotviet:
-    headers = {
-        "authority": "api-man1.kiotviet.vn",
-        "accept": "application/json, text/plain, */*",
-        "accept-language": "vi-VN,vi;q=0.9,en;q=0.8,ru;q=0.7",
-        "authorization": f"Bearer {read_token()}",
-        "branchid": "225357",
-        "content-type": "application/json;charset=utf-8",
-        "fingerprintkey": "7ef50ff5ee7f281739b180cfe18698c3_Chrome_Desktop_Máy tính Mac OS",
-        "isusekvclient": "1",
-        "origin": "https://nhathuochaiyenbg.kiotviet.vn",
-        "referer": "https://nhathuochaiyenbg.kiotviet.vn/",
-        "retailer": "nhathuochaiyenbg",
-        "sec-ch-ua": '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"macOS"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
-        "x-group-id": "18",
-        "x-retailer-code": "nhathuochaiyenbg",
-    }
+    def get_headers(self):
+        headers = {
+            "authority": "api-man1.kiotviet.vn",
+            "accept": "application/json, text/plain, */*",
+            "accept-language": "vi-VN,vi;q=0.9,en;q=0.8,ru;q=0.7",
+            "authorization": f"Bearer {read_token()}",
+            "branchid": "225357",
+            "content-type": "application/json;charset=utf-8",
+            "fingerprintkey": "7ef50ff5ee7f281739b180cfe18698c3_Chrome_Desktop_Máy tính Mac OS",
+            "isusekvclient": "1",
+            "origin": "https://nhathuochaiyenbg.kiotviet.vn",
+            "referer": "https://nhathuochaiyenbg.kiotviet.vn/",
+            "retailer": "nhathuochaiyenbg",
+            "sec-ch-ua": '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"macOS"',
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-site",
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+            "x-group-id": "18",
+            "x-retailer-code": "nhathuochaiyenbg",
+        }
+        return headers
 
     def get_file_name(self, file_prefix: str):
         now = datetime.now(pytz.timezone("Asia/Ho_Chi_Minh"))
@@ -72,7 +74,7 @@ class Kiotviet:
     def export(self, json_data: dict):
         response = requests.post(
             "https://api-man1.kiotviet.vn/api/importexportfiles/exportfile",
-            headers=self.headers,
+            headers=self.get_headers(),
             json=json_data,
         )
 
@@ -94,7 +96,7 @@ class Kiotviet:
             response = requests.get(
                 "https://api-man1.kiotviet.vn/api/importexportfiles",
                 params=params,
-                headers=self.headers,
+                headers=self.get_headers(),
             )
             ic(response.json())
 
