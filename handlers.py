@@ -22,6 +22,8 @@ from telegram.ext import (
     filters,
 )
 
+from kiemton import RESULT_FILE, Kiotviet, write_token
+
 DB_FILE = "db.json"
 
 
@@ -196,6 +198,31 @@ async def debug(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text=json.dumps(db_dict))
 
 
+async def update_token(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    token = "".join(context.args)
+    if token:
+        write_token(token=token)
+        await update.message.reply_text(text="Done!")
+    else:
+        await update.message.reply_text(text="Please input token")
+
+
+async def kiemton(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        kiotviet = Kiotviet()
+        kiotviet.run()
+
+        file = open(RESULT_FILE, "rb")
+
+        await update.message.reply_document(
+            caption=f"Tổng kết bán hàng cuối ngày: {datetime.now().strftime('%d-%m-%Y')}",
+            document=file,
+        )
+
+    except Exception as e:
+        await update.message.reply_text(f"Error\n{e}")
+
+
 strategyPatterns = {
     "ping": ping,
     "start": start,
@@ -205,6 +232,8 @@ strategyPatterns = {
     "xoa": xoa,
     "tinh": tinh,
     "debug": debug,
+    "kiemton": kiemton,
+    "token": update_token,
 }
 
 handlers = []

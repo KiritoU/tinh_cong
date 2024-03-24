@@ -1,5 +1,7 @@
 .env
 examples
+venv
+token.txt
 
 .DS*
 log
