@@ -218,6 +218,7 @@ async def kiemton(update: Update, context: ContextTypes.DEFAULT_TYPE):
             caption=f"Tổng kết bán hàng cuối ngày: {datetime.now().strftime('%d-%m-%Y')}",
             document=file,
         )
+        os.remove(RESULT_FILE)
 
     except Exception as e:
         await update.message.reply_text(f"Error\n{e}")
