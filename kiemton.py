@@ -3,6 +3,7 @@ import json
 import logging
 import os
 import random
+import sys
 from datetime import datetime
 from pathlib import Path
 from time import sleep
@@ -10,6 +11,7 @@ from time import sleep
 import pandas as pd
 import pytz
 import requests
+from dotenv import dotenv_values, load_dotenv
 from icecream import ic
 from telegram import Bot
 
@@ -20,6 +22,30 @@ EXCEL_FOLDER = "excel"
 RESULT_FILE = "result.csv"
 LOG_FILE = "log.txt"
 Path(EXCEL_FOLDER).mkdir(parents=True, exist_ok=True)
+
+load_dotenv()  # take environment variables from .env
+
+env = dotenv_values(".env")
+TOKEN = env.get("TOKEN")
+CHAT_ID = env.get("CHAT_ID")
+
+
+def send_message(msg):
+    url = (
+        f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={msg}"
+    )
+
+    response = requests.get(url)
+
+
+async def send_file(filepath):
+    bot = Bot(token=TOKEN)
+    file = open(filepath, "rb")
+    await bot.send_document(
+        caption=f"Tổng kết bán hàng cuối ngày: {datetime.now().strftime('%d-%m-%Y')}",
+        chat_id=CHAT_ID,
+        document=file,
+    )
 
 
 def read_token():
@@ -190,9 +216,20 @@ class Kiotviet:
 
 
 if __name__ == "__main__":
-    try:
-        kiotviet = Kiotviet()
-        kiotviet.run()
+    error = "None"
+    for _ in range(5):
+        try:
+            kiotviet = Kiotviet()
+            kiotviet.run()
 
-    except Exception as e:
-        write_log(f"Error: {e}")
+            asyncio.run(send_file(RESULT_FILE))
+
+            sys.exit(0)
+
+        except Exception as e:
+            write_log(f"Error: {e}")
+            error = f"{e}"
+
+        sleep(60)
+
+    send_message(msg=f"Failed after 5 times.\n{error}")
