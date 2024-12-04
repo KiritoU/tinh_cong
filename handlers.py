@@ -26,6 +26,33 @@ from kiemton import RESULT_FILE, Kiotviet, write_token
 
 DB_FILE = "db.json"
 
+# List of allowed users (IDs or usernames)
+ALLOWED_USERS = ["1655527971", "Jena882".lower()]
+
+
+def is_user_allowed(user: Update) -> bool:
+    """Check if the user is allowed to use the bot."""
+    if (
+        str(user.effective_user.username).lower() in ALLOWED_USERS
+        or str(user.effective_user.id).strip("@") in ALLOWED_USERS
+    ):
+        return True
+    return False
+
+
+def restricted(func):
+    """Decorator to restrict access to certain commands."""
+
+    async def wrapper(
+        update: Update, context: ContextTypes.DEFAULT_TYPE, *args, **kwargs
+    ):
+        if is_user_allowed(update):
+            await func(update, context, *args, **kwargs)
+        else:
+            await update.message.reply_text("You are not authorized to use this bot.")
+
+    return wrapper
+
 
 def add_this_year() -> str:
     now = datetime.now()
@@ -48,6 +75,7 @@ def get_off_hours_str(off_hours) -> str:
     return f"Số giờ nghỉ: {off_hours} giờ." if off_hours else ""
 
 
+@restricted
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
@@ -56,16 +84,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+@restricted
 async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text="Pong!", parse_mode="HTML")
 
 
+@restricted
 async def getchat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.message.chat.id
 
     await update.message.reply_text(text="Chat ID: %s" % chat_id)
 
 
+@restricted
 async def batdau(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) < 1:
         await update.message.reply_text(
@@ -98,6 +129,7 @@ Ví dụ:  /batdau 15/4
         )
 
 
+@restricted
 async def nghi(update: Update, context: ContextTypes.DEFAULT_TYPE):
     def format_hours() -> int:
         if len(context.args) < 2:
@@ -142,6 +174,7 @@ Ví dụ:  /nghi 25/4
         )
 
 
+@restricted
 async def xoa(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) < 1:
         await update.message.reply_text(
@@ -169,6 +202,7 @@ Ví dụ: /xoa 25/4""",
         )
 
 
+@restricted
 async def tinh(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         db_dict = get_db()
@@ -191,9 +225,9 @@ async def tinh(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # print(sorted_days_off_dict)
         sum_hours_off = sum(int(day[-1]) for day in sorted_days_off_dict)
         # print(sum_hours_off)
-        _29days = start_day + timedelta(days=29) + timedelta(hours=sum_hours_off)
+        _28days = start_day + timedelta(days=28) + timedelta(hours=sum_hours_off)
 
-        msg += f"\n\nNgày đủ 29 công: {_29days.strftime('%d/%m/%Y %H:%M:%S')}"
+        msg += f"\n\nNgày đủ 28 công: {_28days.strftime('%d/%m/%Y %H:%M:%S')}"
         await update.message.reply_text(text=msg)
 
     except Exception as e:
@@ -203,11 +237,13 @@ async def tinh(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+@restricted
 async def debug(update: Update, context: ContextTypes.DEFAULT_TYPE):
     db_dict = get_db()
     await update.message.reply_text(text=json.dumps(db_dict))
 
 
+@restricted
 async def update_token(update: Update, context: ContextTypes.DEFAULT_TYPE):
     token = "".join(context.args)
     if token:
@@ -217,6 +253,7 @@ async def update_token(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(text="Please input token")
 
 
+@restricted
 async def kiemton(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         kiotviet = Kiotviet()
