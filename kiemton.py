@@ -29,6 +29,11 @@ env = dotenv_values(".env")
 TOKEN = env.get("TOKEN")
 CHAT_ID = env.get("CHAT_ID")
 
+PROXY = {
+    "http": f"http://dijxsbnf:zvewklzjmp5d@173.211.0.148:6641",
+    "https": f"http://dijxsbnf:zvewklzjmp5d@173.211.0.148:6641",
+}
+
 
 def send_message(msg):
     url = (
@@ -139,7 +144,24 @@ class Kiotviet:
             sleep(1)
 
     def download_file(self):
-        response = requests.get(self.FilePath)
+        headers = {
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "accept-language": "vi-VN,vi;q=0.9,en;q=0.8,ru;q=0.7",
+            # 'cookie': 'gkvas-uuid=afc36b61-65be-4b6b-92a9-0f399260b6c5; gkvas-uuid-d=1706177550722; _fw_crm_v=22d93d20-5d76-4078-aaeb-98b84922b705; ktarget_retailer_id=1181435',
+            "priority": "u=0, i",
+            "sec-ch-ua": '"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"macOS"',
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "none",
+            "sec-fetch-user": "?1",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36",
+        }
+        response = requests.get(
+            self.FilePath, headers=headers, proxies=PROXY, timeout=10
+        )
 
         self.saved_file = os.path.join(EXCEL_FOLDER, self.FilePath.split("/")[-1])
         with open(self.saved_file, "wb") as f:

@@ -1,0 +1,149 @@
+File name: DanhSachChiTietHoaDon_KV26092024-172739-571
+Revision:
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+File name: DanhSachChiTietHoaDon_KV26092024-172756-607
+Revision: AAAAALb23vM=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/495996765f344f02a3b7193ad7797725/DanhSachChiTietHoaDon_KV26092024-172756-607.xlsx
+Error: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+File name: DanhSachChiTietHoaDon_KV26092024-173139-457
+Revision: AAAAALb3E+Q=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/506093e0037341039940ca5ff4081eb0/DanhSachChiTietHoaDon_KV26092024-173139-457.xlsx
+Error: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+File name: DanhSachChiTietHoaDon_KV26092024-173233-305
+Revision: AAAAALb3Huc=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/b77a91392c5b435aa8b22b0a9b13ea0a/DanhSachChiTietHoaDon_KV26092024-173233-305.xlsx
+File name: DanhSachSanPham_KV26092024-173237-913
+Revision: AAAAALb3H4I=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Trying to get file path => 6 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/80ea2fa2d5d641b392b51b79939c454d/DanhSachSanPham_KV26092024-173237-913.xlsx
+Error: Chat_id is empty
+File name: DanhSachChiTietHoaDon_KV26092024-173313-609
+Revision: AAAAALb3J1Y=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/b159ce78abe443fe826004eff49f2d4d/DanhSachChiTietHoaDon_KV26092024-173313-609.xlsx
+File name: DanhSachSanPham_KV26092024-173317-247
+Revision: AAAAALb3KJ0=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Trying to get file path => 6 time(s)
+Trying to get file path => 7 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/8e0c08bed15f445e86345788335ea88c/DanhSachSanPham_KV26092024-173317-247.xlsx
+File name: DanhSachChiTietHoaDon_KV26092024-174341-861
+Revision: AAAAALb3plU=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/8e38a4456b314481af2d636c40cd0e9c/DanhSachChiTietHoaDon_KV26092024-174341-861.xlsx
+File name: DanhSachSanPham_KV26092024-174347-859
+Revision: AAAAALb3p6c=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/4b0bf289a0d54e2bbd61cd1f30f6d92f/DanhSachSanPham_KV26092024-174347-859.xlsx
+File name: DanhSachChiTietHoaDon_KV26092024-181443-870
+Revision: AAAAALb5GR4=
+Trying to get file path => 0 time(s)
+File name: DanhSachChiTietHoaDon_KV02102024-171126-440
+Revision: AAAAALgZ2rk=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/92c3544300004d2a861907c3e12ef2e8/DanhSachChiTietHoaDon_KV02102024-171126-440.xlsx
+File name: DanhSachChiTietHoaDon_KV02102024-171247-404
+Revision: AAAAALgZ7Lw=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/894fb6088b5b485e910ca67bb5b5e421/DanhSachChiTietHoaDon_KV02102024-171247-404.xlsx
+File name: DanhSachSanPham_KV02102024-171255-180
+Revision: AAAAALgZ8C4=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Trying to get file path => 6 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/e1876f3d57ed46c89fbf0967ca45d9f3/DanhSachSanPham_KV02102024-171255-180.xlsx
+File name: DanhSachChiTietHoaDon_KV02102024-171330-773
+Revision: AAAAALgaDEY=
+Trying to get file path => 0 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/87510f3940f342899a9121ffb6863201/DanhSachChiTietHoaDon_KV02102024-171330-773.xlsx
+File name: DanhSachSanPham_KV02102024-171332-233
+Revision: AAAAALgaDQE=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/561260a454b94bbe8cc53a582a406a4f/DanhSachSanPham_KV02102024-171332-233.xlsx
+File name: DanhSachChiTietHoaDon_KV03102024-164253-243
+Revision: AAAAALhOsKA=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/b3d51282a97349a0a3a894852220effd/DanhSachChiTietHoaDon_KV03102024-164253-243.xlsx
+File name: DanhSachChiTietHoaDon_KV03102024-164327-537
+Revision: AAAAALhOt/w=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/5d6bead6bff84695964634c5ab5db65a/DanhSachChiTietHoaDon_KV03102024-164327-537.xlsx
+File name: DanhSachChiTietHoaDon_KV03102024-164517-742
+Revision: AAAAALhO0PQ=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/a9a63cb904ef46be90f10e3b63df0609/DanhSachChiTietHoaDon_KV03102024-164517-742.xlsx
+File name: DanhSachSanPham_KV03102024-164526-892
+Revision: AAAAALhO0pM=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Trying to get file path => 6 time(s)
+Trying to get file path => 7 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/ecb7ed64a9244b3d8caba520afdbcbff/DanhSachSanPham_KV03102024-164526-892.xlsx
+File name: DanhSachChiTietHoaDon_KV03102024-165004-618
+Revision: AAAAALhPJ58=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/a021208dd0314e76aca329ec588c2f5e/DanhSachChiTietHoaDon_KV03102024-165004-618.xlsx
+File name: DanhSachSanPham_KV03102024-165009-123
+Revision: AAAAALhPKec=
+Trying to get file path => 0 time(s)
+Trying to get file path => 1 time(s)
+Trying to get file path => 2 time(s)
+Trying to get file path => 3 time(s)
+Trying to get file path => 4 time(s)
+Trying to get file path => 5 time(s)
+Trying to get file path => 6 time(s)
+Got FilePath: https://cdn-s3vn-rt-export.kiotviet.vn/nhathuochaiyenbg/65dbd35d5c384013a502496b60832562/DanhSachSanPham_KV03102024-165009-123.xlsx

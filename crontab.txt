@@ -1,0 +1,1 @@
+17 0 * * * cd /root/tinh_cong && source venv/bin/activate && python kiemton.py >> /root/tinh_cong/kiemton.log 2>&1

@@ -99,6 +99,16 @@ Ví dụ:  /batdau 15/4
 
 
 async def nghi(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    def format_hours() -> int:
+        if len(context.args) < 2:
+            return 24
+        off_hours = 0
+        for ch in context.args[1]:
+            if ch.isdigit():
+                off_hours = off_hours * 10 + int(ch)
+
+        return off_hours
+
     if len(context.args) < 1:
         await update.message.reply_text(
             text="""Nhập thêm ngày nghỉ
@@ -111,7 +121,7 @@ Ví dụ:  /nghi 25/4
 
     try:
         input_date_str = context.args[0] + add_this_year()
-        off_hours = context.args[1] if len(context.args) >= 2 else 24
+        off_hours = format_hours()
         input_date = datetime.strptime(input_date_str, "%d/%m/%Y")
         db_dict = get_db()
 
