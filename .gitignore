@@ -2,6 +2,9 @@
 examples
 venv
 token.txt
+kiemton_manual.py
+result.csv
+log.txt
 
 .DS*
 log
